@@ -14,4 +14,4 @@ Validate with `npm run build` and `npm run lint`.
 - `src/index.css`: global typography, color tokens, and automatic dark mode.
 - `public/images/blog-desk.webp`: original editorial artwork for the landing page.
 
-Existing Cloudflare deployment scripts remain available.
+Cloudflare Pages builds the `master` branch with `npm run build` and publishes the `dist` directory.
