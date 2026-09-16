@@ -47,25 +47,14 @@ Connect the Worker to GitHub under **Settings > Builds** using these settings:
 | Production branch | `master` |
 | Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
-| Preview deploy command | `npx wrangler versions upload` |
 | Root directory | Repository root |
 
 The Worker name in Cloudflare must match `portfolio` in `wrangler.jsonc`.
 
-- Production: <https://shalinnaidoo.dev>
-- Worker URL: <https://portfolio.shalinnaidoo.workers.dev>
+Production: <https://shalinbtw.com>
 
-### Domain migration
+The custom domain is declared in `wrangler.jsonc`. The `workers.dev` address and
+version preview URLs are disabled, matching the Cloudflare dashboard settings.
 
-`wrangler.jsonc` declares `shalinnaidoo.dev` as the Worker's custom domain.
-For the initial cutover, remove the Pages-managed CNAME for `shalinnaidoo.dev`
-from the zone's DNS records and detach the domain from the `portfolio` Pages
-project. Then run `npm run deploy` to let Workers create the domain's DNS record
-and certificate. Verify the homepage and a direct article URL before disabling
-the old Pages project's automatic deployments.
-
-The Pages deployment at <https://portfolio-bsy.pages.dev> can be retained
-temporarily for rollback. To restore it, remove the Worker's custom domain,
-reconnect `shalinnaidoo.dev` to the `portfolio` Pages project, and restore its
-proxied CNAME to `portfolio-bsy.pages.dev`. Re-enable Pages Git deployments if
-rolling back permanently.
+The former Cloudflare Pages project has been removed. Use the Worker's deployment
+history in Cloudflare for rollbacks.
