@@ -1,13 +1,55 @@
+@font-face {
+  font-family: Geist;
+  src: url("/fonts/geist-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist-mono-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* Instrument Serif is Louder's actual display face, carried over by request. */
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/instrument-serif-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/instrument-serif-italic-latin.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
-  --paper: #f4f2e9;
-  --ink: #101d3b;
-  --muted: #536078;
-  --quiet: #c4c6c0;
-  --line: #b9bdc2;
-  --soft: #e6e3da;
-  --accent: #b54a32;
-  --sans: "Avenir Next", Avenir, "Helvetica Neue", Helvetica, system-ui, sans-serif;
-  --mono: "SFMono-Regular", Consolas, "Liberation Mono", ui-monospace, monospace;
+  /* Exact light palette from trylouder.ai. See docs/brand-digest.html. */
+  --paper: #f4f2ec;
+  --ink: #0b0b0a;
+  --ink-secondary: #0b0b0ab3;
+  --muted: #6e6a63;
+  --line: #0b0b0a14;
+  --line-strong: #0b0b0a29;
+  --soft: #eceae3;
+  --accent: #c6ff3d;
+  --accent-ink: #0b0b0a;
+  --sans: Geist, "Helvetica Neue", system-ui, sans-serif;
+  --display: "Instrument Serif", Georgia, serif;
+  --mono: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+  --radius-small: 12px;
+  --radius-media: 16px;
+  --radius-pill: 999px;
+  --ease: cubic-bezier(0.22, 0.7, 0.24, 1);
+  color-scheme: light;
   color: var(--ink);
   background: var(--paper);
   font-family: var(--sans);
@@ -42,25 +84,40 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-a:focus-visible {
-  outline: 3px solid var(--accent);
+a:focus-visible,
+button:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--ink);
   outline-offset: 5px;
 }
 
 ::selection {
   background: var(--accent);
-  color: var(--paper);
+  color: var(--accent-ink);
+}
+
+/* Portfolio extension: the reference site only defines a light theme. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141511;
+  --ink: #f4f2ec;
+  --ink-secondary: #c9c8c0;
+  --muted: #aba99f;
+  --line: #f4f2ec1a;
+  --line-strong: #f4f2ec29;
+  --soft: #20221b;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #151d22;
-    --ink: #edf0e8;
-    --muted: #aab3b2;
-    --quiet: #465155;
-    --line: #485257;
-    --soft: #222c31;
-    --accent: #df725b;
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --paper: #141511;
+    --ink: #f4f2ec;
+    --ink-secondary: #c9c8c0;
+    --muted: #aba99f;
+    --line: #f4f2ec1a;
+    --line-strong: #f4f2ec29;
+    --soft: #20221b;
   }
 }
 

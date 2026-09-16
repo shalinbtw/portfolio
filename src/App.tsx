@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { ArrowTopRightIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import "./App.css";
 
 type Post = {
@@ -8,6 +10,8 @@ type Post = {
   readingTime: string;
   cover: string;
   coverAlt: string;
+  coverWidth: number;
+  coverHeight: number;
 };
 
 const samplePost: Post = {
@@ -16,21 +20,76 @@ const samplePost: Post = {
   summary: "A short note on simplifying this site into a place for writing.",
   publishedAt: "10 September 2026",
   readingTime: "2 min read",
-  cover: "/images/blog-desk.webp",
-  coverAlt: "An open blank notebook beside a pencil and keyboard on a blue desk",
+  cover: "/images/building-this-blog.webp",
+  coverAlt: 'The title "Building this blog" printed on warm paper beside a pencil and a lime paper tab',
+  coverWidth: 1672,
+  coverHeight: 941,
 };
 
 const posts = [samplePost];
+
+type Theme = "system" | "light" | "dark";
+
+function ThemeToggle() {
+  const [theme, setTheme] = useState<Theme>(() => {
+    const saved = document.documentElement.dataset.theme;
+    return saved === "light" || saved === "dark" ? saved : "system";
+  });
+  const [systemDark, setSystemDark] = useState(() =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches,
+  );
+  const isDark = theme === "dark" || (theme === "system" && systemDark);
+  const label = `Switch to ${isDark ? "light" : "dark"} mode`;
+
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-color-scheme: dark)");
+    const updateSystemTheme = (event: MediaQueryListEvent) => {
+      setSystemDark(event.matches);
+    };
+    preference.addEventListener("change", updateSystemTheme);
+    return () => preference.removeEventListener("change", updateSystemTheme);
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "system") delete root.dataset.theme;
+    else root.dataset.theme = theme;
+
+    try {
+      if (theme === "system") localStorage.removeItem("portfolio-theme");
+      else localStorage.setItem("portfolio-theme", theme);
+    } catch {
+      // Theme switching still works when browser storage is unavailable.
+    }
+
+    document.querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", isDark ? "#141511" : "#f4f2ec");
+  }, [theme, isDark]);
+
+  return (
+    <button
+      type="button"
+      className="theme-toggle"
+      aria-label={label}
+      title={label}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+    >
+      {isDark ? (
+        <SunIcon width={20} height={20} aria-hidden="true" />
+      ) : (
+        <MoonIcon width={20} height={20} aria-hidden="true" />
+      )}
+    </button>
+  );
+}
 
 function SiteHeader() {
   return (
     <header className="site-header">
       <a className="wordmark" href="/" aria-label="Shalin Naidoo, home">
-        <span className="wordmark-mark" aria-hidden="true">
-          SN
-        </span>
-        <span>Shalin Naidoo</span>
+        Shalin Naidoo
       </a>
+      <ThemeToggle />
     </header>
   );
 }
@@ -39,27 +98,19 @@ function BlogIndex() {
   return (
     <>
       <SiteHeader />
-      <main className="post-grid" aria-label="Blog posts">
+      <main className="post-index" aria-label="Blog posts">
         {posts.map((post) => (
-          <article className="post-card" key={post.slug}>
-            <a href={`/writing/${post.slug}`}>
-              <img
-                src={post.cover}
-                alt={post.coverAlt}
-                width="1200"
-                height="900"
-              />
-              <div className="post-card-body">
-                <div className="post-meta">
-                  <time dateTime="2026-09-10">{post.publishedAt}</time>
-                  <span>{post.readingTime}</span>
-                </div>
+          <article className="post-entry" key={post.slug}>
+            <a className="post-entry-link" href={`/writing/${post.slug}`}>
+              <div className="post-meta">
+                <time dateTime="2026-09-10">{post.publishedAt}</time>
+                <span>{post.readingTime}</span>
+              </div>
+              <div className="post-entry-body">
                 <h1>{post.title}</h1>
                 <p>{post.summary}</p>
-                <span className="read-link">
-                  Read post <span aria-hidden="true">↗</span>
-                </span>
               </div>
+              <ArrowTopRightIcon className="post-entry-arrow" aria-hidden="true" />
             </a>
           </article>
         ))}
@@ -95,8 +146,8 @@ function SampleArticle() {
             className="article-cover"
             src={samplePost.cover}
             alt={samplePost.coverAlt}
-            width="1200"
-            height="900"
+            width={samplePost.coverWidth}
+            height={samplePost.coverHeight}
           />
 
           <div className="article-copy">

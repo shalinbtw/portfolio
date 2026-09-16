@@ -1,6 +1,6 @@
 # Shalin Naidoo | Writing
 
-A personal blog built with React, TypeScript, and Vite. The homepage opens directly into the post grid and includes one sample article.
+A personal blog built with React, TypeScript, and Vite. The homepage opens directly into a simple writing list and includes one sample article.
 
 ```sh
 npm install
@@ -12,7 +12,18 @@ Validate with `npm run build` and `npm run lint`.
 - `src/App.tsx`: the post index and sample article.
 - `src/App.css`: responsive editorial layout and component styling.
 - `src/index.css`: global typography, color tokens, and automatic dark mode.
-- `public/images/blog-desk.webp`: original editorial artwork for the landing page.
+- `public/images/building-this-blog.webp`: generated article cover featuring the post title.
+- `docs/image-prompts/building-this-blog.md`: cover generation prompt and asset details.
+- `public/fonts/`: self-hosted Geist, Geist Mono, and Instrument Serif, with their licences.
+- `docs/brand-digest.html`: an offline brand reference covering the Louder palette,
+  typography, components, contrast, and copyable CSS tokens. Open the file directly
+  in a browser. It stays in the repo and is not included in the production build.
+
+The visual identity follows [Louder](https://trylouder.ai/): warm paper
+(`#f4f2ec`), near-black ink (`#0b0b0a`), and electric lime (`#c6ff3d`). The header
+sun/moon button switches between light and dark mode and remembers the choice.
+It follows the system preference until first used. Dark colours are a portfolio
+adaptation of Louder's light palette.
 
 ## Cloudflare Workers
 
