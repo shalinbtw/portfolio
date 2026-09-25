@@ -1,32 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowTopRightIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { posts, type Post } from "./posts";
 import "./App.css";
-
-type Post = {
-  slug: string;
-  title: string;
-  summary: string;
-  publishedAt: string;
-  readingTime: string;
-  cover: string;
-  coverAlt: string;
-  coverWidth: number;
-  coverHeight: number;
-};
-
-const samplePost: Post = {
-  slug: "building-this-blog",
-  title: "Building this blog",
-  summary: "A short note on simplifying this site into a place for writing.",
-  publishedAt: "10 September 2026",
-  readingTime: "2 min read",
-  cover: "/images/building-this-blog.webp",
-  coverAlt: 'The title "Building this blog" printed on warm paper beside a pencil and a lime paper tab',
-  coverWidth: 1672,
-  coverHeight: 941,
-};
-
-const posts = [samplePost];
 
 type Theme = "system" | "light" | "dark";
 
@@ -103,7 +78,7 @@ function BlogIndex() {
           <article className="post-entry" key={post.slug}>
             <a className="post-entry-link" href={`/writing/${post.slug}`}>
               <div className="post-meta">
-                <time dateTime="2026-09-10">{post.publishedAt}</time>
+                <time dateTime={post.dateTime}>{post.publishedAt}</time>
                 <span>{post.readingTime}</span>
               </div>
               <div className="post-entry-body">
@@ -117,13 +92,13 @@ function BlogIndex() {
       </main>
       <footer>
         <p>Shalin Naidoo</p>
-        <p>{posts.length} post</p>
+        <p>{posts.length} {posts.length === 1 ? "post" : "posts"}</p>
       </footer>
     </>
   );
 }
 
-function SampleArticle() {
+function Article({ post }: { post: Post }) {
   return (
     <>
       <SiteHeader />
@@ -135,36 +110,25 @@ function SampleArticle() {
         <article>
           <header className="article-header">
             <div className="post-meta">
-              <time dateTime="2026-09-10">{samplePost.publishedAt}</time>
-              <span>{samplePost.readingTime}</span>
+              <time dateTime={post.dateTime}>{post.publishedAt}</time>
+              <span>{post.readingTime}</span>
             </div>
-            <h1>{samplePost.title}</h1>
-            <p>{samplePost.summary}</p>
+            <h1>{post.title}</h1>
+            <p>{post.summary}</p>
           </header>
 
           <img
             className="article-cover"
-            src={samplePost.cover}
-            alt={samplePost.coverAlt}
-            width={samplePost.coverWidth}
-            height={samplePost.coverHeight}
+            src={post.cover}
+            alt={post.coverAlt}
+            width={post.coverWidth}
+            height={post.coverHeight}
           />
 
           <div className="article-copy">
-            <p>
-              This site started as a portfolio, but the format asked for more
-              attention than the things I actually wanted to share. A simple
-              blog feels like a better fit.
-            </p>
-            <p>
-              The new version begins with the writing. There is no introduction
-              to get through and no elaborate navigation. Each post gets a clear
-              title, a date, and enough room to be read comfortably.
-            </p>
-            <p>
-              This is only a sample. It is here to test the shape of the archive
-              and the reading experience before the real posts arrive.
-            </p>
+            {post.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </article>
       </main>
@@ -177,11 +141,22 @@ function SampleArticle() {
 }
 
 export default function App() {
-  const isSamplePost = window.location.pathname === `/writing/${samplePost.slug}`;
+  const path = window.location.pathname.replace(/\/$/, "");
+  const post = posts.find((entry) => path === `/writing/${entry.slug}`);
+
+  useEffect(() => {
+    document.title = post
+      ? `${post.title} | Shalin Naidoo`
+      : "Shalin Naidoo | Writing";
+    document.querySelector('meta[name="description"]')?.setAttribute(
+      "content",
+      post?.summary ?? "Writing by Shalin Naidoo about software, systems, and interesting problems.",
+    );
+  }, [post]);
 
   return (
     <div className="site-shell">
-      {isSamplePost ? <SampleArticle /> : <BlogIndex />}
+      {post ? <Article post={post} /> : <BlogIndex />}
     </div>
   );
 }
