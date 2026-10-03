@@ -6,8 +6,8 @@ import "./App.css";
 function SiteHeader({ onIndex = false }: { onIndex?: boolean }) {
   return (
     <header className="site-header">
-      <a className="wordmark" href="/" aria-label="Shalin Naidoo, home">
-        Shalin Naidoo
+      <a className="wordmark" href="/" aria-label="Shalin, home">
+        Shalin
       </a>
       <nav className="site-nav" aria-label="Main">
         <a href="/" aria-current={onIndex ? "page" : undefined}>
@@ -36,7 +36,7 @@ function BlogIndex() {
         </div>
       </main>
       <footer>
-        <p>Shalin Naidoo</p>
+        <p>Shalin</p>
         <p>{posts.length} {posts.length === 1 ? "post" : "posts"}</p>
       </footer>
     </>
@@ -71,7 +71,7 @@ function Article({ post }: { post: Post }) {
         </article>
       </main>
       <footer>
-        <p>Shalin Naidoo</p>
+        <p>Shalin</p>
         <a href="/">All writing</a>
       </footer>
     </>
@@ -83,9 +83,6 @@ export default function App() {
   const post = posts.find((entry) => path === `/writing/${entry.slug}`);
 
   useEffect(() => {
-    document.title = post
-      ? `${post.title} | Shalin Naidoo`
-      : "Shalin Naidoo | Writing";
     document.querySelector('meta[name="description"]')?.setAttribute(
       "content",
       post?.summary ?? "Writing by Shalin Naidoo about software, systems, and interesting problems.",
