@@ -1,6 +1,6 @@
 # Shalin Naidoo | Writing
 
-A personal blog built with React, TypeScript, and Vite. The homepage opens directly into a simple writing list, with articles at `/writing/:slug`.
+A personal blog built with React, TypeScript, and Vite. The homepage opens directly into a grid of posts, with articles at `/writing/:slug`.
 
 ```sh
 npm install
@@ -12,19 +12,16 @@ Validate with `npm run build` and `npm run lint`.
 - `src/App.tsx`: the post index and shared article layout.
 - `src/posts.ts`: article content and metadata, ordered newest first.
 - `src/App.css`: responsive editorial layout and component styling.
-- `src/index.css`: global typography, color tokens, and automatic dark mode.
-- `public/images/`: generated article covers featuring each post title.
-- `docs/image-prompts/`: cover generation prompts and asset details.
-- `public/fonts/`: self-hosted Geist, Geist Mono, and Instrument Serif, with their licences.
-- `docs/brand-digest.html`: an offline brand reference covering the Louder palette,
+- `src/index.css`: global typography and dark color tokens.
+- `public/fonts/`: self-hosted Poppins for the site, plus the Geist, Geist Mono, and
+  Instrument Serif files the brand digest uses, with their licences.
+- `docs/brand-digest.html`: an offline reference for the earlier Louder palette,
   typography, components, contrast, and copyable CSS tokens. Open the file directly
   in a browser. It stays in the repo and is not included in the production build.
 
-The visual identity follows [Louder](https://trylouder.ai/): warm paper
-(`#f4f2ec`), near-black ink (`#0b0b0a`), and electric lime (`#c6ff3d`). The header
-sun/moon button switches between light and dark mode and remembers the choice.
-It follows the system preference until first used. Dark colours are a portfolio
-adaptation of Louder's light palette.
+The look follows the LocalThunk blog landing page: dark slate (`#1a242c`), off-white text (`#f3f6f8`), Poppins, and a grid of
+posts showing a date above a large title. Electric lime (`#c6ff3d`) remains for the
+favicon and text selection. The site always uses this dark palette.
 
 ## Cloudflare Workers
 

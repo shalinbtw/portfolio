@@ -1,57 +1,44 @@
 @font-face {
-  font-family: Geist;
-  src: url("/fonts/geist-latin.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist Mono";
-  src: url("/fonts/geist-mono-latin.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-}
-
-/* Instrument Serif is Louder's actual display face, carried over by request. */
-@font-face {
-  font-family: "Instrument Serif";
-  src: url("/fonts/instrument-serif-latin.woff2") format("woff2");
+  font-family: Poppins;
+  src: url("/fonts/poppins-400-latin.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Instrument Serif";
-  src: url("/fonts/instrument-serif-italic-latin.woff2") format("woff2");
-  font-style: italic;
-  font-weight: 400;
+  font-family: Poppins;
+  src: url("/fonts/poppins-500-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url("/fonts/poppins-600-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
   font-display: swap;
 }
 
 :root {
-  /* Exact light palette from trylouder.ai. See docs/brand-digest.html. */
-  --paper: #f4f2ec;
-  --ink: #0b0b0a;
-  --ink-secondary: #0b0b0ab3;
-  --muted: #6e6a63;
-  --line: #0b0b0a14;
-  --line-strong: #0b0b0a29;
-  --soft: #eceae3;
+  /* Dark slate palette sampled from the LocalThunk blog landing page. */
+  --bg: #1a242c;
+  --text: #f3f6f8;
+  --text-body: #d8e1e7;
+  --text-secondary: #c3cfd7;
+  --muted: #93a3af;
+  --line: #dce8ef1f;
+  --pill: #ddebf6;
   --accent: #c6ff3d;
   --accent-ink: #0b0b0a;
-  --sans: Geist, "Helvetica Neue", system-ui, sans-serif;
-  --display: "Instrument Serif", Georgia, serif;
-  --mono: "Geist Mono", "SFMono-Regular", Consolas, monospace;
-  --radius-small: 12px;
-  --radius-media: 16px;
+  --sans: Poppins, "Helvetica Neue", system-ui, sans-serif;
   --radius-pill: 999px;
   --ease: cubic-bezier(0.22, 0.7, 0.24, 1);
-  color-scheme: light;
-  color: var(--ink);
-  background: var(--paper);
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
   font-family: var(--sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -70,6 +57,7 @@ body {
   min-width: 320px;
   min-height: 100dvh;
   margin: 0;
+  background: var(--bg);
 }
 
 h1,
@@ -87,7 +75,7 @@ a {
 a:focus-visible,
 button:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--text);
   outline-offset: 5px;
 }
 
@@ -96,29 +84,13 @@ select:focus-visible {
   color: var(--accent-ink);
 }
 
-/* Portfolio extension: the reference site only defines a light theme. */
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --paper: #141511;
-  --ink: #f4f2ec;
-  --ink-secondary: #c9c8c0;
-  --muted: #aba99f;
-  --line: #f4f2ec1a;
-  --line-strong: #f4f2ec29;
-  --soft: #20221b;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    color-scheme: dark;
-    --paper: #141511;
-    --ink: #f4f2ec;
-    --ink-secondary: #c9c8c0;
-    --muted: #aba99f;
-    --line: #f4f2ec1a;
-    --line-strong: #f4f2ec29;
-    --soft: #20221b;
-  }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 @media (prefers-reduced-motion: reduce) {
