@@ -60,11 +60,6 @@ export function ContactForm() {
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
       <div className="field">
-        <label htmlFor="contact-name">Name</label>
-        <input id="contact-name" name="name" autoComplete="name" maxLength={100} required />
-      </div>
-
-      <div className="field">
         <label htmlFor="contact-email">Email</label>
         <input
           id="contact-email"

@@ -2,11 +2,11 @@
 // request is served straight from the static assets in dist.
 
 const MAX_BODY_BYTES = 16_384;
-const MAX_LENGTH = { name: 100, email: 254, message: 5000 };
+const MAX_LENGTH = { email: 254, message: 5000 };
 const EMAIL_PATTERN = /^[^\s@<>()",;:]+@[^\s@<>()",;:]+\.[^\s@<>()",;:]+$/;
 const SEND_FAILED = "Your message couldn't be sent. Please try again later.";
 
-type ContactMessage = { name: string; email: string; message: string };
+type ContactMessage = { email: string; message: string };
 
 export default {
   async fetch(request, env): Promise<Response> {
@@ -37,14 +37,14 @@ export default {
       return json({ ok: true });
     }
 
-    const { name, email, message } = parsed.contact;
+    const { email, message } = parsed.contact;
     try {
       await env.SEND_EMAIL.send({
         from: { name: "Website contact form", email: env.CONTACT_FROM },
         to: env.CONTACT_TO,
-        replyTo: { name, email },
-        subject: `Message from ${name}`,
-        text: `${message}\n\n${name} <${email}>\nSent from the contact form on ${url.hostname}`,
+        replyTo: email,
+        subject: `Message from ${email}`,
+        text: `${message}\n\n${email}\nSent from the contact form on ${url.hostname}`,
       });
     } catch (error) {
       console.error("Contact email failed", error);
@@ -78,14 +78,9 @@ async function parseSubmission(
     const value = fields[key];
     return typeof value === "string" ? value.trim() : "";
   };
-  // Names go into email headers, so drop any control characters.
-  const name = text("name").replace(/[\p{Cc}\p{Cf}]/gu, "");
   const email = text("email");
   const message = text("message");
 
-  if (!name || name.length > MAX_LENGTH.name) {
-    return { error: `Please enter your name (up to ${MAX_LENGTH.name} characters).` };
-  }
   if (email.length > MAX_LENGTH.email || !EMAIL_PATTERN.test(email)) {
     return { error: "Please enter a valid email address." };
   }
@@ -93,7 +88,7 @@ async function parseSubmission(
     return { error: `Please enter a message (up to ${MAX_LENGTH.message} characters).` };
   }
 
-  return { contact: { name, email, message }, isBot: text("website") !== "" };
+  return { contact: { email, message }, isBot: text("website") !== "" };
 }
 
 function json(body: object, status = 200, headers: Record<string, string> = {}): Response {
