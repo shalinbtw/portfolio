@@ -53,7 +53,7 @@ Connect the Worker to GitHub under **Settings > Builds** using these settings:
 | Setting | Value |
 | --- | --- |
 | Repository | `shalinbtw/portfolio` |
-| Production branch | `master` |
+| Production branch | `main` |
 | Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
 | Root directory | Repository root |
