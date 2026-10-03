@@ -31,9 +31,13 @@
   --muted: #93a3af;
   --line: #dce8ef1f;
   --pill: #ddebf6;
+  --field: #202b34;
+  --field-border: #6c7d89;
+  --error: #ff9b8f;
   /* Text selection uses the dog's yellow from the fire dog favicon. */
   --highlight: #f8ce5e;
   --sans: Poppins, "Helvetica Neue", system-ui, sans-serif;
+  --radius-field: 12px;
   --radius-pill: 999px;
   --ease: cubic-bezier(0.22, 0.7, 0.24, 1);
   color-scheme: dark;
