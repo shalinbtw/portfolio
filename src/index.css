@@ -31,8 +31,8 @@
   --muted: #93a3af;
   --line: #dce8ef1f;
   --pill: #ddebf6;
-  --accent: #c6ff3d;
-  --accent-ink: #0b0b0a;
+  /* Text selection uses the dog's yellow from the fire dog favicon. */
+  --highlight: #f8ce5e;
   --sans: Poppins, "Helvetica Neue", system-ui, sans-serif;
   --radius-pill: 999px;
   --ease: cubic-bezier(0.22, 0.7, 0.24, 1);
@@ -80,8 +80,8 @@ select:focus-visible {
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--highlight);
+  color: var(--bg);
 }
 
 .visually-hidden {

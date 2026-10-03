@@ -19,9 +19,10 @@ Validate with `npm run build` and `npm run lint`.
   typography, components, contrast, and copyable CSS tokens. Open the file directly
   in a browser. It stays in the repo and is not included in the production build.
 
-The look follows the LocalThunk blog landing page: dark slate (`#1a242c`), off-white text (`#f3f6f8`), Poppins, and a grid of
-posts showing a date above a large title. Electric lime (`#c6ff3d`) remains for the
-favicon and text selection. The site always uses this dark palette.
+The look follows the LocalThunk blog landing page: dark slate (`#1a242c`),
+off-white text (`#f3f6f8`), Poppins, and a grid of posts showing a date above a
+large title. Selected text is highlighted in the yellow (`#f8ce5e`) from the fire
+dog favicon in `public/favicon.svg`. The site always uses this dark palette.
 
 ## Cloudflare Workers
 
