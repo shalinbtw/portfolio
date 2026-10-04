@@ -10,6 +10,22 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "letting-go-of-the-fishing-game",
+    title: "Letting go of the fishing game",
+    summary:
+      "Nine days, 260 commits, and a game that got better every time I gave something up.",
+    publishedAt: "4 October 2026",
+    dateTime: "2026-10-04",
+    readingTime: "1 min read",
+    paragraphs: [
+      "Nine days ago I started a cozy fishing game. A little island, a rowboat, and rings on the water where the fish would bite.",
+      "Today it's called Starwake. You fly a ship through open space, hunt glowing creatures with a harpoon, and tow salvage home past the edge of a black hole. The folder on my laptop is still called FishingGame.",
+      "Getting there meant dropping things that didn't work. What stayed was the loop from day one: leave somewhere safe, catch something, haul it home, get better. The ocean was just the first shape it took.",
+      "I really liked some of the ideas I dropped. But liking an idea doesn't make it a good one, and the game only moved forward once I stopped letting that feeling decide what stayed.",
+      "I probably won't rename the folder, though.",
+    ],
+  },
+  {
     slug: "engineering-the-feedback-loop",
     title: "Engineering the feedback loop",
     summary:
