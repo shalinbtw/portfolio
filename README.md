@@ -24,9 +24,23 @@ Validate with `npm run build` and `npm run lint`.
   in a browser. It stays in the repo and is not included in the production build.
 
 The look follows the LocalThunk blog landing page: dark slate (`#1a242c`),
-off-white text (`#f3f6f8`), Poppins, and a grid of posts showing a date above a
-large title. Selected text is highlighted in the yellow (`#f8ce5e`) from the fire
-dog favicon in `public/favicon.svg`. The site always uses this dark palette.
+off-white text (`#f3f6f8`), Poppins, and a grid of posts showing a cover, date,
+and large title. Selected text is highlighted in the yellow (`#f8ce5e`) from the
+fire dog favicon in `public/favicon.svg`. The site always uses this dark palette.
+
+### Post cover art
+
+Use a monochromatic slate palette for the covers. Keep the shadows close to the
+page background (`#1a242c`) and lift the highlights within the same blue-grey hue.
+The narrow tonal range lets the halftone lines and grain define each subject
+while the off-white titles stay the strongest element in the grid. Review new
+art on the page at card size, where fine detail can disappear.
+
+Each cover uses a square composition that also reads in the article's wide
+crop. Save 480 px and 960 px WebP versions as
+`public/images/posts/<slug>-480.webp` and `public/images/posts/<slug>.webp`,
+then add `coverAlt` in `src/posts.ts`. The shared `post-cover-slate` filter
+in `src/App.tsx` maps the source image's luminance to the site palette.
 
 ## Cloudflare Workers
 

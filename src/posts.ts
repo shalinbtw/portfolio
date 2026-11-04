@@ -5,12 +5,14 @@ export type Post = {
   publishedAt: string;
   dateTime: string;
   readingTime: string;
+  coverAlt: string;
   paragraphs: string[];
 };
 
 export const posts: Post[] = [
   {
     slug: "letting-go-of-the-fishing-game",
+    coverAlt: "A rowboat drifts toward a whirlpool in a star-speckled sea.",
     title: "Letting go of the fishing game",
     summary:
       "Nine days, 260 commits, and a game that got better every time I gave something up.",
@@ -27,6 +29,7 @@ export const posts: Post[] = [
   },
   {
     slug: "engineering-the-feedback-loop",
+    coverAlt: "A repeating waveform on a vintage oscilloscope.",
     title: "Engineering the feedback loop",
     summary:
       "The bottleneck in productivity has shifted away from raw code generation.",
@@ -42,6 +45,7 @@ export const posts: Post[] = [
   },
   {
     slug: "building-this-blog",
+    coverAlt: "A pen rests across an open notebook.",
     title: "Building this blog",
     summary: "A short note on simplifying this site into a place for writing.",
     publishedAt: "10 September 2026",

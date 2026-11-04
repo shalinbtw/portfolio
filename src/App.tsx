@@ -24,6 +24,26 @@ function SiteHeader({ current }: { current?: Page }) {
   );
 }
 
+function PostCover({ post, sizes, decorative = false }: {
+  post: Post;
+  sizes: string;
+  decorative?: boolean;
+}) {
+  const imagePath = `/images/posts/${post.slug}`;
+
+  return (
+    <img
+      className="post-cover"
+      src={`${imagePath}.webp`}
+      srcSet={`${imagePath}-480.webp 480w, ${imagePath}.webp 960w`}
+      sizes={sizes}
+      width={960}
+      height={960}
+      alt={decorative ? "" : post.coverAlt}
+    />
+  );
+}
+
 function BlogIndex() {
   return (
     <>
@@ -34,6 +54,11 @@ function BlogIndex() {
           {posts.map((post) => (
             <article className="post-card" key={post.slug}>
               <a className="post-card-link" href={`/writing/${post.slug}`}>
+                <PostCover
+                  post={post}
+                  sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 767px) calc(50vw - 32px), (max-width: 1023px) calc(48vw - 32px), (max-width: 1383px) calc(31vw - 24px), 403px"
+                  decorative
+                />
                 <time dateTime={post.dateTime}>{post.dateTime}</time>
                 <h2>{post.title}</h2>
               </a>
@@ -68,6 +93,8 @@ function Article({ post }: { post: Post }) {
             <h1>{post.title}</h1>
             <p>{post.summary}</p>
           </header>
+
+          <PostCover post={post} sizes="(max-width: 751px) calc(100vw - 32px), 720px" />
 
           <div className="article-copy">
             {post.paragraphs.map((paragraph) => (
@@ -121,5 +148,22 @@ export default function App() {
   if (post) page = <Article post={post} />;
   else if (isContact) page = <ContactPage />;
 
-  return <div className="site-shell">{page}</div>;
+  return (
+    <div className="site-shell">
+      <svg width="0" height="0" aria-hidden="true" style={{ position: "absolute" }}>
+        <defs>
+          <filter id="post-cover-slate" colorInterpolationFilters="sRGB">
+            <feColorMatrix type="saturate" values="0" />
+            {/* Keep shadows near the slate background and highlights below the title contrast. */}
+            <feComponentTransfer>
+              <feFuncR type="table" tableValues="0.141 0.208 0.322 0.447 0.573" />
+              <feFuncG type="table" tableValues="0.192 0.275 0.396 0.522 0.635" />
+              <feFuncB type="table" tableValues="0.231 0.318 0.447 0.573 0.678" />
+            </feComponentTransfer>
+          </filter>
+        </defs>
+      </svg>
+      {page}
+    </div>
+  );
 }
