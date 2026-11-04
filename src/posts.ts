@@ -11,6 +11,21 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "software-is-now-a-risk-management-problem",
+    coverAlt: "A railway switch where one track splits into two.",
+    title: "Software is now a risk management problem",
+    summary:
+      "When implementation is cheap, delivery speed depends on how quickly you can tell what’s safe to release.",
+    publishedAt: "4 November 2026",
+    dateTime: "2026-11-04",
+    readingTime: "1 min read",
+    paragraphs: [
+      "An agent can have a pull request ready before I’ve finished thinking through how I’d roll it out. That’s a good trade, but it leaves me with a question I used to have more time to answer. What would make me comfortable putting this in front of a customer?",
+      "Implementation is becoming a commodity. The cost of writing code is falling, and the cost of getting it wrong in front of customers is as real as ever. That makes managing risk part of the implementation itself. You have to decide who could be affected, what you need to know before you ship, and how much you can put right if you’re wrong.",
+      "The faster we build, the more selective we have to be about what we slow down. Make changes that are easy to undo easy to ship. Give changes with lasting consequences more scrutiny. I want a team to be able to say ‘this is ready’ and ‘this needs more time’ in the same afternoon, and ship what’s ready.",
+    ],
+  },
+  {
     slug: "letting-go-of-the-fishing-game",
     coverAlt: "A rowboat drifts toward a whirlpool in a star-speckled sea.",
     title: "Letting go of the fishing game",
