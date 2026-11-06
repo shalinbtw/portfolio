@@ -26,7 +26,7 @@ export const posts: Post[] = [
     ],
   },
   {
-    slug: "letting-go-of-the-fishing-game",
+    slug: "learning-to-say-no-to-myself",
     coverAlt: "A rowboat drifts toward a whirlpool in a star-speckled sea.",
     title: "Learning to say no to myself",
     summary:
