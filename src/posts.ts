@@ -28,7 +28,7 @@ export const posts: Post[] = [
   {
     slug: "letting-go-of-the-fishing-game",
     coverAlt: "A rowboat drifts toward a whirlpool in a star-speckled sea.",
-    title: "Letting go of the fishing game",
+    title: "Learning to say no to myself",
     summary:
       "Nine days, 260 commits, and a game that got better every time I gave something up.",
     publishedAt: "4 October 2026",
